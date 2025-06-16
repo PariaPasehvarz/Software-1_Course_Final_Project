@@ -20,5 +20,7 @@ public class User {
     @EqualsAndHashCode.Include
     private String uuid;
 
-
+    public void setUsername(String testUser) {
+        firstName = testUser;
+    }
 }

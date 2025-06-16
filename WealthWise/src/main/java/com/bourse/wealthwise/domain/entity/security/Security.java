@@ -16,11 +16,25 @@ public class Security {
 
     private String symbol;
 
+
+    public String getName() {
+        return name;
+    }
+
     @Builder.Default
     private SecurityType securityType = SecurityType.STOCK;
 
     private String isin;
 
+    public String getIsin() {
+        return isin;
+    }
 
+    public void setIsin(String testIsin) {
+        isin = testIsin;
+    }
 
+    public void setName(String _name) {
+        name = _name;
+    }
 }

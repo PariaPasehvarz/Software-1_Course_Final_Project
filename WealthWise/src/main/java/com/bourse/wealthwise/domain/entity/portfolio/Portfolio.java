@@ -27,4 +27,8 @@ public class Portfolio {
         this.portfolioManager = portfolioManager;
         this.name = name;
     }
+
+    public void setUuid(String _uuid) {
+        uuid = _uuid;
+    }
 }
