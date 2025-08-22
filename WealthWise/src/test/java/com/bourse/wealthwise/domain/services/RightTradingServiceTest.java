@@ -1,40 +1,53 @@
-package com.wealthwise.rights;
+package com.bourse.wealthwise.domain.services;
 
-import com.wealthwise.rights.domain.ActionType;
-import com.wealthwise.rights.domain.HoldingSnapshot;
-import com.wealthwise.rights.domain.SecurityChange;
-import com.wealthwise.rights.exception.NotEnoughRightsException;
-import com.wealthwise.rights.service.PortfolioQueryService;
-import com.wealthwise.rights.service.RightTradingService;
+import com.bourse.wealthwise.domain.entity.account.User;
+import com.bourse.wealthwise.domain.entity.portfolio.Portfolio;
+import com.bourse.wealthwise.domain.entity.security.Security;
+import com.bourse.wealthwise.repository.ActionRepository;
+import com.bourse.wealthwise.repository.SecurityRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDateTime;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+@SpringBootTest
 public class RightTradingServiceTest {
-    InMemorySecurityChangeRepository repo;
-    RightTradingService svc;
 
-    @BeforeEach void setup() {
-        repo = new InMemorySecurityChangeRepository();
-        svc = new RightTradingService(repo);
-        repo.append(new SecurityChange("P1", "FOOLAD_X", 120, null, ActionType.ADJUSTMENT, "seed"));
+    @Autowired private RightTradingService rightTradingService;
+    @Autowired private ActionRepository actionRepository;
+    @Autowired private SecurityRepository securityRepository;
+
+    private Security right;
+    private Portfolio p;
+
+    @BeforeEach
+    void setup() {
+        actionRepository.clear();
+        securityRepository.clear();
+        right = Security.builder().name("Foo Right").symbol("FOO_X").isin("ISIN-FOO-X").build();
+        securityRepository.addSecurity(right);
+        p = new Portfolio("P1", User.builder().firstName("A").lastName("B").build(), "Port");
     }
 
-    @Test void buy_adds_rights() {
-        svc.buyRights("P1", "FOOLLAD_X".replace("LL", "L"), 30, 10.0, "o1"); // 30
-        HoldingSnapshot s = new PortfolioQueryService(repo).currentHoldings("P1");
-        assertEquals(150, s.volumeOf("FOOLAD_X"));
+    @Test
+    void can_buy_and_sell_rights_within_owned() {
+        rightTradingService.buyRights(p, right, 5, 10.0, LocalDateTime.now().minusHours(1));
+        rightTradingService.sellRights(p, right, 3, 12.0, LocalDateTime.now());
+
+        // Expect two actions saved
+        assertThat(actionRepository.findAllActionsOf(p.getUuid())).hasSize(2);
     }
 
-    @Test void sell_reduces_rights() {
-        svc.sellRights("P1", "FOOLAD_X", 20, 10.0, "o2");
-        HoldingSnapshot s = new PortfolioQueryService(repo).currentHoldings("P1");
-        assertEquals(100, s.volumeOf("FOOLAD_X"));
-    }
-
-    @Test void cannot_sell_more_than_owned() {
-        assertThrows(NotEnoughRightsException.class, () ->
-                svc.sellRights("P1", "FOOLAD_X", 121, 10.0, "o3"));
+    @Test
+    void cannot_sell_more_than_owned() {
+        rightTradingService.buyRights(p, right, 2, 10.0, LocalDateTime.now().minusHours(1));
+        assertThrows(IllegalArgumentException.class, () ->
+            rightTradingService.sellRights(p, right, 3, 12.0, LocalDateTime.now())
+        );
     }
 }

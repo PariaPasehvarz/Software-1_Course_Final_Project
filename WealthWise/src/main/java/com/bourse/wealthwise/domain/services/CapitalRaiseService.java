@@ -1,6 +1,8 @@
 package com.bourse.wealthwise.domain.services;
 
+import com.bourse.wealthwise.domain.entity.action.Buy;
 import com.bourse.wealthwise.domain.entity.action.CapitalRaise;
+import com.bourse.wealthwise.domain.entity.action.Sale;
 import com.bourse.wealthwise.domain.entity.portfolio.Portfolio;
 import com.bourse.wealthwise.domain.entity.security.Security;
 import com.bourse.wealthwise.repository.ActionRepository;
@@ -21,30 +23,32 @@ public class CapitalRaiseService {
     private final SecurityRepository securityRepository;
 
     public void processAnnouncement(String symbol, double perShare, LocalDateTime now) {
-        Security stock = securityRepository.findBySymbol(symbol)
-                .orElseThrow(() -> new IllegalArgumentException("Security not found: " + symbol));
+        Security stock = securityRepository.findSecurityBySymbol(symbol);
+        Security right = securityRepository.findSecurityBySymbol(symbol + "_X");
+        if (stock == null || right == null) {
+            throw new IllegalArgumentException("Stock or right security not found for symbol " + symbol);
+        }
 
-        Security right = securityRepository.findBySymbol(symbol + "_X")
-                .orElseThrow(() -> new IllegalArgumentException("Right security not defined: " + symbol + "_X"));
-
-        for (Portfolio portfolio : portfolioRepository.findAll()) {
-            // count how many of the stock they hold
-            long held = actionRepository.findAllActionsOf(portfolio.getUuid()).stream()
-                    .filter(a -> a.getSecurity().equals(stock))
-                    .mapToLong(a -> a.getVolume().longValue())
-                    .sum();
-
-            long rightsToGrant = (long) Math.floor(held * perShare);
-            if (rightsToGrant > 0) {
-                CapitalRaise cr = CapitalRaise.builder()
-                        .portfolio(portfolio)
-                        .security(right)
-                        .volume(BigInteger.valueOf(rightsToGrant))
-                        .datetime(now)
-                        .build();
-
-                actionRepository.save(cr);
+        for (Portfolio portfolio : portfolioRepository.getPortfolios()) {
+            long currentShares = 0L;
+            for (var a : actionRepository.findAllActionsOf(portfolio.getUuid())) {
+                if (a instanceof Buy b && b.getSecurity().equals(stock)) {
+                    currentShares += b.getVolume().longValue();
+                } else if (a instanceof Sale s && s.getSecurity().equals(stock)) {
+                    currentShares -= s.getVolume().longValue();
+                }
             }
+
+            long grant = (long) Math.floor(currentShares * perShare);
+            if (grant <= 0) continue;
+
+            CapitalRaise cr = CapitalRaise.builder()
+                    .portfolio(portfolio)
+                    .security(right)
+                    .volume(BigInteger.valueOf(grant))
+                    .datetime(now)
+                    .build();
+            actionRepository.save(cr);
         }
     }
 }

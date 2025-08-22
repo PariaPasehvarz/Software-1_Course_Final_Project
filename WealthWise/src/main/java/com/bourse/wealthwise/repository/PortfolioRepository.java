@@ -2,7 +2,7 @@ package com.bourse.wealthwise.repository;
 
 import com.bourse.wealthwise.domain.entity.portfolio.Portfolio;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -26,5 +26,10 @@ public class PortfolioRepository {
 
     public void deleteById(String uuid) {
         portfolios.remove(uuid);
+    }
+
+    /** Alias kept for tests that expect getPortfolios() */
+    public List<Portfolio> getPortfolios() {
+        return findAll();
     }
 }

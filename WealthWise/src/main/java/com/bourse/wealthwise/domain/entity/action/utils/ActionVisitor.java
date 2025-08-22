@@ -11,4 +11,7 @@ public interface ActionVisitor {
     String visit(Sale sale);
     String visit(Deposit deposit);
     String visit(Withdrawal withdrawal);
+    String visit(com.bourse.wealthwise.domain.entity.action.CapitalRaise action);
+    String visit(com.bourse.wealthwise.domain.entity.action.StockRightUsage action);
+
 }
