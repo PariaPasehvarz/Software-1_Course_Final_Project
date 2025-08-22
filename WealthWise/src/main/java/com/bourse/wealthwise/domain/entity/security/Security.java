@@ -38,3 +38,28 @@ public class Security {
         name = _name;
     }
 }
+// Ali's Edit, to be deleted if everything worked well
+//import java.util.Objects;
+//
+//public final class Security {
+//    private final String symbol; // e.g. FOOLAD, FOOLAD_X
+//    private final SecurityType type;
+//
+//    public Security(String symbol, SecurityType type) {
+//        this.symbol = Objects.requireNonNull(symbol).toUpperCase();
+//        this.type = Objects.requireNonNull(type);
+//    }
+//
+//    public String getSymbol() { return symbol; }
+//    public SecurityType getType() { return type; }
+//
+//    @Override public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Security)) return false;
+//        Security that = (Security) o;
+//        return symbol.equals(that.symbol) && type == that.type;
+//    }
+//
+//    @Override public int hashCode() { return Objects.hash(symbol, type); }
+//    @Override public String toString() { return symbol + "(" + type + ")"; }
+//}

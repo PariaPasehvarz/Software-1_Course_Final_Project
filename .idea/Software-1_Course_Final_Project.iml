@@ -3,7 +3,11 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/WealthWise/src/test" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/WealthWise/src/test/java" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/WealthWise/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/WealthWise/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/WealthWise/src/main/resources" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
