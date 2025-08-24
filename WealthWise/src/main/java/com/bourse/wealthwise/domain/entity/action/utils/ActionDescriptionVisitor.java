@@ -47,4 +47,27 @@ public class ActionDescriptionVisitor implements ActionVisitor {
                 withdrawal.getDatetime().format(formatter),
                 withdrawal.getAmount());
     }
+
+    @Override
+    public String visit(com.bourse.wealthwise.domain.entity.action.StockRightUsage action) {
+        // Format a readable description for right usage
+        var dt = action.getDatetime();
+        var when = dt != null ? dt.format(DATE_TIME_FORMATTER) : "n/a";
+
+        var right = action.getRightSecurity() != null
+                ? action.getRightSecurity().getSymbol()
+                : "RIGHT";
+
+        var stock = action.getStockSecurity() != null
+                ? action.getStockSecurity().getSymbol()
+                : "STOCK";
+
+        var qty = action.getRightsUsed() != null
+                ? action.getRightsUsed()
+                : java.math.BigInteger.ZERO;
+
+        return String.format("STOCK_RIGHT_USAGE used %s of %s → %s on %s",
+                qty, right, stock, when);
+    }
+
 }

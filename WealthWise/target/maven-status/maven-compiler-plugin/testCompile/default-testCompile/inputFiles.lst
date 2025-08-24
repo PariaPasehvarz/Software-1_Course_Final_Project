@@ -7,6 +7,7 @@
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/test/java/com/bourse/wealthwise/domain/services/RightTradingServiceTest.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/test/java/com/bourse/wealthwise/domain/services/StockRightUsageServiceTest.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/test/java/com/bourse/wealthwise/messaging/CapitalRaiseAnnouncementsConsumerTest.java
+/mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/test/java/com/bourse/wealthwise/messaging/CapitalRaiseJmsAdapterTest.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/test/java/com/bourse/wealthwise/messaging/CapitalRaiseParserTest.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/test/java/com/bourse/wealthwise/repository/SecurityRepositorySymbolTest.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/test/java/com/bourse/wealthwise/repository/SecurityRepositoryTest.java

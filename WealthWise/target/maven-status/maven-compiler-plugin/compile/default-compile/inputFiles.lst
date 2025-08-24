@@ -26,6 +26,8 @@
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/main/java/com/bourse/wealthwise/domain/services/RightTradingService.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/main/java/com/bourse/wealthwise/domain/services/StockRightUsageService.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/main/java/com/bourse/wealthwise/messaging/CapitalRaiseAnnouncementsConsumer.java
+/mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/main/java/com/bourse/wealthwise/messaging/CapitalRaiseJmsAdapter.java
+/mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/main/java/com/bourse/wealthwise/messaging/CapitalRaiseJmsProducer.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/main/java/com/bourse/wealthwise/messaging/CapitalRaiseListener.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/main/java/com/bourse/wealthwise/messaging/CapitalRaiseParser.java
 /mnt/c/aidin/AIDIN/peregrine/term-6/se1/cas/p4/Software-1_Course_Final_Project/WealthWise/src/main/java/com/bourse/wealthwise/repository/ActionRepository.java
