@@ -1,0 +1,15 @@
+com/bourse/wealthwise/domain/services/CapitalRaiseServiceTest.class
+com/bourse/wealthwise/messaging/CapitalRaiseJmsAdapterTest.class
+com/bourse/wealthwise/messaging/CapitalRaiseAnnouncementsConsumerTest.class
+com/bourse/wealthwise/domain/entity/action/StockRightUsageActionTest.class
+com/bourse/wealthwise/repository/SecurityRepositoryTest.class
+com/bourse/wealthwise/WealthWiseApplicationTests.class
+com/bourse/wealthwise/domain/services/PortfolioStockSummaryServiceTest$EdgeCaseTests.class
+com/bourse/wealthwise/domain/services/PortfolioActionServiceTest.class
+com/bourse/wealthwise/domain/services/BalanceActionServiceTest.class
+com/bourse/wealthwise/domain/services/PortfolioStockSummaryServiceTest$BasicTests.class
+com/bourse/wealthwise/domain/services/RightTradingServiceTest.class
+com/bourse/wealthwise/repository/SecurityRepositorySymbolTest.class
+com/bourse/wealthwise/domain/services/StockRightUsageServiceTest.class
+com/bourse/wealthwise/messaging/CapitalRaiseParserTest.class
+com/bourse/wealthwise/domain/services/PortfolioStockSummaryServiceTest.class

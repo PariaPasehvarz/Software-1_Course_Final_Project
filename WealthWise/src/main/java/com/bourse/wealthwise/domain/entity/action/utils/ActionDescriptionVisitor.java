@@ -1,18 +1,13 @@
 package com.bourse.wealthwise.domain.entity.action.utils;
 
-import com.bourse.wealthwise.domain.entity.action.Buy;
-import com.bourse.wealthwise.domain.entity.action.Sale;
-import com.bourse.wealthwise.domain.entity.action.Withdrawal;
-import com.bourse.wealthwise.domain.entity.action.Deposit;
-
-
-
+import com.bourse.wealthwise.domain.entity.action.*;
 
 import java.time.format.DateTimeFormatter;
 
 public class ActionDescriptionVisitor implements ActionVisitor {
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Override
     public String visit(Buy buy) {
@@ -70,4 +65,9 @@ public class ActionDescriptionVisitor implements ActionVisitor {
                 qty, right, stock, when);
     }
 
+    @Override
+    public String visit(CapitalRaise capitalRaise) {
+        // Replace with actual logic
+        return "CapitalRaise description";
+    }
 }
